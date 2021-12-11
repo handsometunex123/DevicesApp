@@ -1,0 +1,29 @@
+<div class="loader-wrapper"
+  [ngClass]="{'overlay fixed top-0 left-0 w-screen bg-gray-700 bg-opacity-50': isOverlay, 'loader-wrapper-minheight' : notSectionLoader}">
+  <!-- <mat-spinner [diameter]="64"></mat-spinner> -->
+  <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="99" height="88.573" viewBox="0 0 99 88.573">
+    <g id="Group_396" data-name="Group 396" transform="translate(-911 -482)">
+      <rect id="Rectangle_120" data-name="Rectangle 120" width="99" height="87" transform="translate(911 482)"
+        fill="none" />
+      <g id="Group_395" data-name="Group 395" transform="translate(-2 2.045)">
+        <g id="Group_394" data-name="Group 394" transform="matrix(-0.259, 0.966, -0.966, -0.259, 1716.995, -270.774)">
+          <g id="Group_392" data-name="Group 392" transform="translate(710.292 332.868)">
+            <path id="Path_56" data-name="Path 56"
+              d="M737.268,419.236c-14.029-.316-26.795,6.722-33.583,17.346-2.216,3.467,4.074,6.53,6.277,3.08,5.62-8.8,16.3-14.382,27.85-14.091a35.481,35.481,0,0,1,28.952,16.839c2.211,3.646,8.01.333,5.819-3.292C765.48,427.445,751.763,419.547,737.268,419.236Z"
+              transform="translate(-485.313 -270.138)" fill="rgba(116,162,193,0.75)" />
+          </g>
+        </g>
+        <g id="Group_220" data-name="Group 220" transform="translate(710.292 332.868)">
+          <path id="Path_55" data-name="Path 55"
+            d="M692.22,481.67c-5.213,0-5.221,8.1,0,8.1S697.441,481.67,692.22,481.67Z"
+            transform="translate(-476.6 -306.625)" fill="#4683ac" />
+          <path id="Path_56-2" data-name="Path 56"
+            d="M737.268,419.236c-14.029-.316-26.795,6.722-33.583,17.346-2.216,3.467,4.074,6.53,6.277,3.08,5.62-8.8,16.3-14.382,27.85-14.091a35.481,35.481,0,0,1,28.952,16.839c2.211,3.646,8.01.333,5.819-3.292C765.48,427.445,751.763,419.547,737.268,419.236Z"
+            transform="translate(-485.313 -270.138)" fill="#4683ac" />
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <p class="mat-body-2">{{loaderText}}</p>
+</div>

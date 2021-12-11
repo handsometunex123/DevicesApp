@@ -1,0 +1,36 @@
+<div class="flex gap-x-4">
+  <mat-form-field
+    class="w-full bg-white search-bar"
+    appearance="fill"
+    [floatLabel]="'auto'"
+  >
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      [formControl]="searchInput"
+      class="input"
+      matInput
+      placeholder="Search by device name (e.g Device 1 to search for Device 1)"
+      type="search"
+      name="filter"
+      id="filter"
+    />
+    <button
+      mat-icon-button
+      matPrefix
+      [attr.aria-label]="'Search'"
+      [attr.aria-pressed]="'true'"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    [@fadeInOut]
+    mat-flat-button
+    color="accent"
+    *ngIf="textInputStarted"
+    (click)="clearSearch()"
+  >
+    Cancel
+  </button>
+</div>

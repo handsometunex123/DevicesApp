@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-y-4 alldevices">
+  <app-device-item
+    class="cursor-pointer each-item"
+    *ngFor="let device of devicesList"
+    [deviceItem]="device"
+    [showInfoButton]="showInfoButton"
+    (click)="showInfoButton ? routeToNextPage(device.id) : ''"
+  ></app-device-item>
+</div>
+
+<app-empty-section-template
+  *ngIf="devicesList.length === 0"
+></app-empty-section-template>

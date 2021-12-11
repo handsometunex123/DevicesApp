@@ -1,0 +1,30 @@
+<div class="bg-gray-200 p-6 flex items-center">
+  <div class="mr-auto flex gap-x-8 items-center">
+    <div
+      class="
+        h-16
+        w-16
+        rounded-full
+        bg-blue-50
+        flex
+        items-center
+        relative
+        justify-center
+      "
+    >
+      <mat-icon color="primary">{{ deviceItem.deviceIcon }}</mat-icon>
+      <div
+        [ngClass]="{
+          'bg-green-600': deviceItem.status === 'available',
+          'bg-gray-600': deviceItem.status === 'offline'
+        }"
+        class="h-4 w-4 absolute bottom-0 right-0 rounded-full"
+      ></div>
+    </div>
+    <div class="flex flex-col gap-y-2">
+      <span class="text-xl">{{ deviceItem.name }}</span>
+      <span class="text-base">Status: {{ deviceItem.status | titlecase }}</span>
+    </div>
+  </div>
+  <mat-icon color="primary" *ngIf="showInfoButton">error</mat-icon>
+</div>

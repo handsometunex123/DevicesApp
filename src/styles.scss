@@ -1,1 +1,130 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "~@angular/material" as mat;
+@import "./custom-palettes";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+
+$custom-typography: mat.define-typography-config(
+  $font-family:
+    '"Poppins", "Raleway", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  $display-4: mat.define-typography-level(56px, 65px, 300),
+  $headline: mat.define-typography-level(32px, 36px, 700),
+  $title: mat.define-typography-level(12px, 18px, 400),
+  $subheading-1: mat.define-typography-level(12px, 18px, 400),
+  $subheading-2: mat.define-typography-level(13px, 16px, 400),
+  $body-1: mat.define-typography-level(10px, 14px, 400),
+  $body-2: mat.define-typography-level(12px, 16px, 700),
+  $caption: mat.define-typography-level(11px, 13px, 400),
+);
+
+@include mat.core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$devicesApp-primary: mat.define-palette($primary, 400, 300, 500);
+$devicesApp-accent: mat.define-palette($accent, 400, 50, 500);
+
+// The warn palette is optional (defaults to red).
+$devicesApp-warn: mat.define-palette(mat.$red-palette, A400);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$devicesApp-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $devicesApp-primary,
+      accent: $devicesApp-accent,
+      warn: $devicesApp-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($devicesApp-theme);
+
+$primary-color: #{mat.get-color-from-palette($devicesApp-primary)};
+$accent-color: #{mat.get-color-from-palette($devicesApp-accent)};
+$warn-color: #{mat.get-color-from-palette($devicesApp-warn)};
+
 /* You can add global styles to this file, and also import other style files */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+}
+
+body {
+  margin: 0;
+  font-family: Poppins, "Helvetica Neue", sans-serif;
+  // background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary));
+
+  .text-primary {
+    color: $primary-color;
+  }
+
+  .bg-primary {
+    background-color: $primary-color;
+    color: #ffffff;
+  }
+
+  .border-primary {
+    border-color: $primary-color;
+  }
+
+  .text-accent {
+    color: $accent-color;
+  }
+
+  .text-warn {
+    color: $warn-color;
+  }
+
+  // Material overrides: FormField
+  .search-bar {
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+      border-radius: 5px;
+      background-color: #f5f5f5;
+      // padding: 4rem;
+    }
+    .mat-form-field-wrapper {
+      padding: 0;
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+    input {
+      line-height: 1.27;
+      // font-size: 14px;
+    }
+  }
+
+  .mat-button,
+  .mat-raised-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button,
+  .mat-fab,
+  .mat-mini-fab {
+    font-size: 12px;
+  }
+
+  .portal-container {
+    max-width: 120rem;
+    margin: 8rem auto;
+    border-radius: 2rem;
+    background-color: #fdfdfd;
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+    min-height: 60rem;
+    padding: 2rem;
+  }
+}

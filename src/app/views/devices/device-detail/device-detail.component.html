@@ -1,0 +1,66 @@
+<ng-container *ngIf="currentDevice$ | async as currentDevice">
+  <div
+  *ngIf="currentDevice?.id; else emptyPage"
+  class="grid grid-cols-2 gap-6 detail-height"
+>
+  <div class="flex flex-col gap-y-4">
+    <div class="bg-gray-200 px-6 py-4 flex items-center mb-6">
+      <span class="text-xl font-bold">Related Devices</span>
+    </div>
+    <app-devices-list
+      *ngIf="currentDevice?.relatedDevices as devices"
+      [devicesList]="devices"
+      [showInfoButton]="false"
+    ></app-devices-list>
+  </div>
+  <div class="flex flex-col h-full border border-gray-300 rounded-xl">
+    <div
+      class="
+        bg-gray-200
+        px-6
+        py-6
+        flex
+        items-center
+        rounded-tr-xl rounded-tl-xl
+      "
+    >
+      <span class="text-xl font-bold">Details: {{ currentDevice.name }}</span>
+    </div>
+    <div class="flex flex-col px-6 h-full justify-between">
+      <div class="flex flex-col gap-y-6 mt-6">
+        <div class="flex gap-x-3">
+          <span class="text-lg font-bold">Status:</span>
+          <span class="text-lg">{{ currentDevice.status | titlecase }}</span>
+        </div>
+        <div class="flex gap-x-3">
+          <span class="text-lg font-bold">Temperature</span>
+          <span class="text-lg">{{ currentDevice.temperature }} Celsius</span>
+        </div>
+        <div>
+          <span class="text-lg font-bold">Usage</span>
+        </div>
+      </div>
+
+      <div class="flex items-end w-full justify-between">
+        <img src="../../../../assets/svg/Group 6.svg" alt="chart 1" />
+        <img src="../../../../assets/svg/Group 7.svg" alt="chart 2" />
+        <img src="../../../../assets/svg/Group 8.svg" alt="chart 3" />
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+
+
+<app-section-loader
+  *ngIf="loader.detailsLoaderAction$ | async"
+  [loaderText]="'Please wait while we fetch your device details'"
+></app-section-loader>
+
+<ng-template #emptyPage>
+  <app-empty-section-template
+    *ngIf="!(loader.detailsLoaderAction$ | async)"
+    [infoText]="'The specified device does not exist'"
+  >
+  </app-empty-section-template>
+</ng-template>

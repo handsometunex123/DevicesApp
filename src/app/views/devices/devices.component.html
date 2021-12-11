@@ -1,0 +1,10 @@
+<app-devices-list
+  *ngIf="deviceWithSearchAction$ | async as devices"
+  [devicesList]="devices"
+></app-devices-list>
+
+<!--This loader triggers anytime the loader subject is updated-->
+<app-section-loader
+  *ngIf="loader.loaderAction$ | async"
+  [loaderText]="'Fetching all devices'"
+></app-section-loader>
