@@ -43,12 +43,14 @@ export class DevicesService {
    */
   devices$: Observable<Device[]> = this.http
     .get<Device[]>(this.devicesUrl)
-    .pipe(catchError(this.handleError))
+    .pipe(catchError(err => this.handleError(err)))
     .pipe(shareReplay(1));
 
   /**
    * combines the devices stream the userInput stream
    * @returns Observable of the filtered device
+   * method implements combine latest which continues to trigger as soon as any
+   * change is detected from either device observable or userInput observable
    */
 
   deviceWithSearchAction$: Observable<Device[]> = combineLatest([
@@ -56,7 +58,8 @@ export class DevicesService {
     this.searchBarService.userInputAction,
   ])
     .pipe(
-      //switchMap helps to rerun the filter process everytime inputtedDeviceName or devices changes.
+      //switchMap helps to automatically unsubscribe from the old observable response from input param supplied and subscribe 
+      // to the new one immediately
       switchMap(([devices, inputedDeviceName]) => {
         const returnedDevices = of(
           devices.filter((device) =>
@@ -84,6 +87,7 @@ export class DevicesService {
     this.selectedDeviceAction$,
   ])
     .pipe(
+      //this prevents the selectedDevice$ observable from emmiting untill the filter condition is satisfied.
       filter(
         ([devices, selectedDeviceId]) =>
           Boolean(selectedDeviceId) && Boolean(devices)
